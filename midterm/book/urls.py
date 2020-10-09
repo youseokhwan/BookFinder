@@ -5,5 +5,5 @@ from book.views import BookView
 app_name = 'book'
 urlpatterns = [
     # root
-    path('', BookView.as_view(), name='book')
+    path('', BookView.as_view(), name='index')
 ]
