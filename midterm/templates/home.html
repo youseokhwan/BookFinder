@@ -30,8 +30,12 @@
             빠르게 달리는 것도 좋지만, 독서를 하며 잠깐 쉬어가는 건 어떨까요?
         </p>
         <hr class="my-4">
-        <p>도서 및 지역서점을 검색해보세요!</p>
+        <p>도서를 검색하고 리스트에 추가해보세요!</p>
         <a class="btn btn-warning" href="{% url 'book:index' %}" role="button">도서 검색</a>
-        <a class="btn btn-warning" href="{% url 'bookstore:index' %}" role="button" data-toggle="tooltip" data-placement="right" title="경기도 지역서점만 검색됩니다">지역서점 검색</a>
+        <hr class="my-4">
+        <p>내 도서를 확인해보세요!</p>
+        <a class="btn btn-warning" href="{% url 'mypage:index' %}" role="button">전체 도서</a>
+        <a class="btn btn-warning" href="#" role="button">이달의 도서</a>
+        <a class="btn btn-warning" href="#" role="button">이주의 도서</a>
     </div>
 {% endblock %}

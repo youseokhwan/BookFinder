@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'book.apps.BookConfig',
-    'bookstore.apps.BookstoreConfig',
     'mypage.apps.MypageConfig',
 ]
 
