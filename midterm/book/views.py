@@ -1,8 +1,7 @@
-from django.views.generic import TemplateView
 from django.views.generic import FormView
 from book.forms import BookSearchForm
 from django.shortcuts import render
-from urllib import request
+from urllib import request, parse
 from pprint import pprint
 import json, re
 
@@ -13,9 +12,10 @@ class BookSearchView(FormView):
 
     def form_valid(self, form):
         keyword = form.cleaned_data['keyword']
+        url = 'https://openapi.naver.com/v1/search/book.json?query=' + parse.quote(keyword) + '&display=12&start=1'
 
         # 네이버 책 API 호출
-        api_request = request.Request('https://openapi.naver.com/v1/search/book.json?query=' + keyword + '&display=12&start=1')
+        api_request = request.Request(url)
         api_request.add_header('X-Naver-Client-Id', 'PRIMARY_ID')
         api_request.add_header('X-Naver-Client-Secret', 'PRIMARY_KEY')
         response = request.urlopen(api_request)
@@ -38,8 +38,9 @@ class BookSearchView(FormView):
                     item['image'] = '/static/img/no-image.png'
 
             context = {
+                'form': form,
                 'keyword': keyword,
-                'object_list': items
+                'object_list': items,
             }
 
             return render(self.request, self.template_name, context)
