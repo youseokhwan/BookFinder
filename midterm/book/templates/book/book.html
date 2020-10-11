@@ -1,6 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}book.html{% endblock %}
 
 {% block content %}
-    <h2>book.html</h2>
+    {# 도서 검색 form #}
+    <form action="" method="post">
+        <label for="book-search">도서 검색</label>
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit" class="btn btn-warning" hidden>검색</button>
+        <small id="book-search-desc" class="form-text text-muted">
+            제목, 저자, 출판사 검색
+        </small>
+    </form>
+
+    {# 검색 결과 #}
+    {% if object_list %}
+        <div class="row row-cols-2 row-cols-md-3">
+            {% for item in object_list %}
+                <div class="col mb-3">
+                    <div class="card mb-3" style="max-width: 540px; max-height: 200px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="{{ item.image }}" class="card-img" alt="{{ item.isbn }}" style="margin: 0 auto;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ item.title }}</h6>
+                                    <p class="card-text text-truncate"><small class="text-muted">{{ item.author }}, {{ item.publisher }}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}
+
+
+
