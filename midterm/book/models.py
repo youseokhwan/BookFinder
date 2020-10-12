@@ -1,3 +1,20 @@
 from django.db import models
 
-# Create your models here.
+
+class Book(models.Model):
+    isbn = models.CharField('ISBN', max_length=50, primary_key=True)  # ISBN
+    title = models.CharField('TITLE', max_length=200)                 # 도서 제목
+    author = models.CharField('AUTHOR', max_length=200)               # 저자
+    publisher = models.CharField('PUBLISHER', max_length=100)         # 출판사
+    pubdate = models.DateField('PUBDATE')                             # 출간일
+    price = models.IntegerField('PRICE', default=0)                   # 정가
+    description = models.CharField('DESCRIPTION', max_length=1000)    # 줄거리
+    image = models.URLField('IMAGE', max_length=200)                  # 썸네일 URL
+
+    class Meta:
+        verbose_name = 'Book'
+        verbose_name_plural = 'Books'
+        ordering = ['title', 'author', 'isbn']
+
+    def __str__(self):
+        return self.title

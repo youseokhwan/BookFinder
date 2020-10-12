@@ -1,9 +1,11 @@
-from django.views.generic import FormView
+from book.models import Book
 from book.forms import BookSearchForm
-from django.shortcuts import render
+from django.views.generic import FormView, TemplateView
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from urllib import request, parse
 from pprint import pprint
-import json, re
+import json, re, datetime
 
 
 class BookSearchView(FormView):
@@ -12,7 +14,7 @@ class BookSearchView(FormView):
 
     def form_valid(self, form):
         keyword = form.cleaned_data['keyword']
-        url = 'https://openapi.naver.com/v1/search/book.json?query=' + parse.quote(keyword) + '&display=12&start=1'
+        url = 'https://openapi.naver.com/v1/search/book.json?query=' + parse.quote(keyword) + '&display=30&start=1'
 
         # 네이버 책 API 호출
         api_request = request.Request(url)
@@ -50,6 +52,34 @@ class BookSearchView(FormView):
             pprint("네이버 API 서버 오류입니다.")
         else:
             pprint("알 수 없는 에러: %s" % response.getcode())
+
+
+class BookInsertAndSearchView(TemplateView):
+    template_name = 'book/book.html'
+
+    # 도서 추가
+    def post(self, req):
+        try:
+            book = Book(
+                isbn=req.POST['isbn'],
+                title=req.POST['title'],
+                author=req.POST['author'],
+                publisher=req.POST['publisher'],
+                pubdate=datetime.datetime.strptime(req.POST['pubdate'], "%Y%m%d").date(),
+                price=req.POST['price'],
+                description=req.POST['description'],
+                image=req.POST['image'],
+            )
+            book.save()
+
+            # success message
+            messages.info(req, req.POST['title'])
+        except:
+            # error message
+            messages.error(req, "error")
+        finally:
+            return redirect('/book')
+
 
 
 # 문자열에서 HTML 태그 제거
