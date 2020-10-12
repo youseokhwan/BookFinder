@@ -14,7 +14,13 @@ class Book(models.Model):
     class Meta:
         verbose_name = 'Book'
         verbose_name_plural = 'Books'
-        ordering = ['title', 'author', 'isbn']
+        ordering = ['isbn']
 
     def __str__(self):
         return self.title
+
+    def get_previous(self):
+        return self.get_previous_by_isbn()
+
+    def get_next(self):
+        return self.get_next_by_isbn()

@@ -1,9 +1,15 @@
 from django.urls import path
-from mypage.views import MypageView
+from mypage.views import BookLV, BookDV, BookMAV
 
 
 app_name = 'mypage'
 urlpatterns = [
     # root
-    path('', MypageView.as_view(), name='index')
+    path('', BookLV.as_view(), name='index'),
+
+    # DetailView
+    path('<int:pk>/', BookDV.as_view(), name='detail'),
+
+    # MonthArchiveView
+    path('<int:year>/<str:month>/', BookMAV.as_view(), name='book_month')
 ]

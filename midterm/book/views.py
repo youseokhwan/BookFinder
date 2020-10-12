@@ -74,9 +74,9 @@ class BookInsertAndSearchView(TemplateView):
 
             # success message
             messages.info(req, req.POST['title'])
-        except:
-            # error message
-            messages.error(req, "error")
+        # except SystemError:
+        #     # error message
+        #     messages.error(req, "error")
         finally:
             return redirect('/book')
 
