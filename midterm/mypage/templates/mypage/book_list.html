@@ -33,10 +33,13 @@
 {% endblock %}
 
 {% block content %}
+    {# 제목 #}
     <h4>내 전체 도서</h4>
+
     <hr>
+
+    {# 도서 목록 #}
     {% if object_list %}
-        {# 도서 목록 #}
         <div class="row row-cols-2 row-cols-md-3">
             {% for item in object_list %}
                 <div class="col mb-3">

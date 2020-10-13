@@ -49,6 +49,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'mypage:index' %}">전체 도서</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'mypage:title_search' %}">제목 검색</a>
                     <a class="dropdown-item" href="{% url 'mypage:year_search' %}">연도별 검색</a>
                 </div>
             </li>

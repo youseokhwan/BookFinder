@@ -8,7 +8,7 @@ from pprint import pprint
 import json, re, datetime
 
 
-class BookSearchView(FormView):
+class BookSearchFormView(FormView):
     form_class = BookSearchForm
     template_name = 'book/book.html'
 
@@ -54,7 +54,7 @@ class BookSearchView(FormView):
             pprint("알 수 없는 에러: %s" % response.getcode())
 
 
-class BookInsertAndSearchView(TemplateView):
+class BookInsertAndSearchFormView(TemplateView):
     template_name = 'book/book.html'
 
     # 도서 추가
@@ -74,12 +74,8 @@ class BookInsertAndSearchView(TemplateView):
 
             # success message
             messages.info(req, req.POST['title'])
-        # except SystemError:
-        #     # error message
-        #     messages.error(req, "error")
         finally:
             return redirect('/book')
-
 
 
 # 문자열에서 HTML 태그 제거

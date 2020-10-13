@@ -1,12 +1,12 @@
 from django.urls import path
-from book.views import BookSearchView, BookInsertAndSearchView
+from book.views import BookSearchFormView, BookInsertAndSearchFormView
 
 
 app_name = 'book'
 urlpatterns = [
     # root
-    path('', BookSearchView.as_view(), name='index'),
+    path('', BookSearchFormView.as_view(), name='index'),
 
     # 내 도서 추가
-    path('insert/', BookInsertAndSearchView.as_view(), name='insert')
+    path('insert/', BookInsertAndSearchFormView.as_view(), name='insert')
 ]
