@@ -35,7 +35,6 @@
         <hr class="my-4">
         <p>내 도서를 확인해보세요!</p>
         <a class="btn btn-warning" href="{% url 'mypage:index' %}" role="button">전체 도서</a>
-        <a class="btn btn-warning" href="#" role="button">이달의 도서</a>
-        <a class="btn btn-warning" href="#" role="button">이주의 도서</a>
+        <a class="btn btn-warning" href="{% url 'mypage:year_search' %}" role="button">연도별 검색</a>
     </div>
 {% endblock %}

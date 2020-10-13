@@ -1,5 +1,5 @@
 from django.urls import path
-from mypage.views import BookLV, BookDV, BookMAV
+from mypage.views import BookLV, BookDV, BookAV, BookYAV
 
 
 app_name = 'mypage'
@@ -10,6 +10,9 @@ urlpatterns = [
     # DetailView
     path('<str:pk>/', BookDV.as_view(), name='detail'),
 
-    # MonthArchiveView
-    path('<int:year>/<str:month>/', BookMAV.as_view(), name='book_month')
+    # ArchiveIndexView
+    path('archive/year', BookAV.as_view(), name='year_search'),
+
+    # YearArchiveView
+    path('archive/<int:year>/', BookYAV.as_view(), name='year_archive')
 ]

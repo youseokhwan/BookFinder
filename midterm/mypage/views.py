@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, MonthArchiveView
+from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView
 from book.models import Book
 
 
@@ -13,8 +13,16 @@ class BookDV(DetailView):
     template_name = 'mypage/book_detail.html'
 
 
-class BookMAV(MonthArchiveView):
+class BookAV(ArchiveIndexView):
     model = Book
-    template_name = 'mypage/book_archive_month.html'
+    template_name = 'mypage/book_year_search.html'
+    date_field = 'pubdate'
+    allow_empty = True
+
+
+class BookYAV(YearArchiveView):
+    model = Book
+    template_name = 'mypage/book_archive_year.html'
     date_field = 'pubdate'
     make_object_list = True
+    paginate_by = 6

@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}book_list.html{% endblock %}
+{% block title %}book_archive_year.html{% endblock %}
 
 {% block extra-style %}
     <style type="text/css">
+        a:hover {
+            text-decoration: none;
+        }
         {# card hover #}
         .card-img, .card-body {
             opacity: 1;
@@ -33,7 +36,10 @@
 {% endblock %}
 
 {% block content %}
-    <h4>내 전체 도서</h4>
+    <h4>
+        <a class="text-success" href="{% url 'mypage:year_search' %}" data-toggle="tooltip" data-placement="bottom" title="연도별 검색" style="color: black">⬅︎</a>&nbsp;&nbsp;
+        {{ year|date:"Y" }}년에 출간된 도서
+    </h4>
     <hr>
     {% if object_list %}
         {# 도서 목록 #}
@@ -96,8 +102,5 @@
                 {% endif %}
             </ul>
         </nav>
-    {% else %}
-        <p>검색된 내 도서가 없습니다.</p>
-        <p><a href="{% url 'book:index' %}">도서 검색</a>에서 도서를 추가해주세요!</p>
     {% endif %}
 {% endblock %}
