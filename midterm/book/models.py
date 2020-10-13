@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Book(models.Model):
@@ -18,6 +19,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('mypage:detail', args=(self.isbn,))
 
     def get_previous(self):
         return self.get_previous_by_isbn()

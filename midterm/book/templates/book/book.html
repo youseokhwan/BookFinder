@@ -56,7 +56,7 @@
 
     {# 도서 검색 form #}
     <form action="" method="post">
-        <h4 for="book-search">도서 검색</h4>
+        <h5 for="book-search">도서 검색</h5>
         {% csrf_token %}
         {{ form.as_table }}
         <button type="submit" class="btn btn-warning" hidden>검색</button>
